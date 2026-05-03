@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"
+       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.amber.min.css"
+       crossorigin="anonymous"
+       referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ get_url(path='css/custom.css') }}">
+    <link rel="icon" href="{{ get_url(path='img/pssh-box-logo.svg') }}">
+    <link rel="canonical" href="{{ current_url}}" />
+{% if page -%}
+   {% if page.title -%}
+   <title>{{ page.title }}</title>
+   {% else -%}
+   <title>PSSH Box tools</title>
+   {% endif -%}
+   {% if page.description -%}
+    <meta name="description" content="{{ page.description }}" />
+   {% endif -%}
+{% endif %}
+    {% if page.authors -%}
+    <meta name="author" content="{{ page.authors | join(sep=', ') }}" />
+    {% else -%}
+    <meta name="author" content="Eric Marsden">
+    {% endif -%}
+    <!-- GitHub pages set a very short 600 second expiry time in their cache-control header, which
+    we can't override. We attempt to tell the browser that the content can be cached longer, even if
+    in principle an HTTP header overrides an HTML meta tag. -->
+    <meta http-equiv="cache-control" content="max-age=3600">
+  </head>
+  <body>
+    <header>
+      {% if page %}
+      <nav aria-label="breadcrumb">
+       <ul>
+        <li><a href="{{ get_url(path='/') }}">PSSH box tools</a></li>
+        <li>{{ page.title }}</li>
+       </ul>
+      </nav>
+
+      <h1><img src="{{ get_url(path='img/pssh-box-logo.svg') }}" style="width:1em" alt="">&nbsp;
+      {{ page.title }}
+      &nbsp;<img src="{{ get_url(path='img/beta.svg') }}" style="width:1em;position:relative;top:-1.1ex;" alt="">
+      </h1>
+      {% else %}
+      <h1><img src="{{ get_url(path='img/pssh-box-logo.svg') }}" style="width:1em" alt="">&nbsp;PSSH box tools</h1>
+      {% endif %}
+
+      <noscript>
+        <article style="background-color:#F08080;margin:2em">
+          <img src="{{ get_url(path='img/error.svg') }}" style="width:1em" alt="">
+          This site’s functionality is implemented in WebAssembly, and requires Javascript.
+        </article>
+      </noscript>
+    </header>
+
+    <main>
+      {% block content %} {% endblock %}
+    </main>
+
+    <hr>
+    <footer class="container">
+    <span>Built on {{ now() | date }} with pssh-box version <span id="version"></span></span>
+    <span><img src="{{ get_url(path='img/github.svg') }}" style="width:1.2em;vertical-align:bottom" alt=""
+        loading="lazy" decoding="async">&nbsp;<a href="https://github.com/emarsden/pssh-box-wasm/">GitHub repository</a></span>
+    <span>WebAssembly <img src="{{ get_url(path='img/webassembly.svg') }}"
+        style="width:1.2em;vertical-align:bottom"
+        alt="" loading="lazy" decoding="async"> made with Rust
+      <img src="{{ get_url(path='img/rustacean.svg') }}" style="width:1.5em"
+           alt="" loading="lazy" decoding="async"></span>
+    </footer>
+    {% block bodyjs %}{% endblock %}
+   </body>
+</html>

@@ -1,0 +1,100 @@
+html,body {
+    height: 100vh;
+}
+
+body {
+    font-size:16px;
+}
+
+header > nav {
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--pico-primary-background) 20%, transparent);
+    margin-bottom: 5ex;
+    padding-left: 1em;
+}
+
+body > footer {
+    position: sticky;
+    top: 100vh;
+}
+
+footer {
+    font-size: small;
+    display: flex;
+    justify-content: space-between;
+}
+
+.output {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    padding: 1em;
+    border-style: dotted;
+    visibility: hidden;
+}
+
+.output table {
+    font-size: 90%;
+}
+
+#cmdline {
+    font-size: 60%;
+}
+
+.pyodide_logs {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    visibility: hidden;
+}
+
+.log {
+    font-size: 60%;
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+}
+
+.failed {
+    background-color: rgba(255, 10, 10, 0.2);
+}
+
+.failed::before {
+    content: url("../img/error.svg");
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 1.7rem;
+    position: relative;
+    top: 1ex;
+}
+
+table.wrapping {
+    table-layout: fixed;
+    width: 100%
+}
+
+table.wrapping td {
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+}
+
+#loading {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.flourish {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.5;
+    margin-top: 3ex;
+    margin-bottom: 3ex;
+}
+
+.flourish::before {
+    content: url("../img/ornament.svg");
+    display: inline-block;
+    width: 30%;
+    max-width: 350px;
+    margin-left: 30%;
+}
+
