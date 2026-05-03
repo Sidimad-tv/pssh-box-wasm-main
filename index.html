@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PSSH Parser Test</title>
+</head>
+<body>
+    <h1>PSSH Box Tool</h1>
+    <textarea id="psshInput" placeholder="Paste Base64 PSSH here..." rows="4" cols="50"></textarea>
+    <button id="parseBtn">Parse PSSH</button>
+    <div id="output"></div>
+
+    <script type="module">
+        // 1. Import the generated "init" and your functions from the pkg folder
+        import init, { pssh_base64_to_html } from './pkg/pssh_box_wasm.js';
+
+        async function start() {
+            // 2. Initialize the WASM module
+            await init();
+            console.log("WASM Loaded!");
+
+            document.getElementById('parseBtn').onclick = () => {
+                const input = document.getElementById('psshInput').value;
+                try {
+                    // 3. Call your Rust function!
+                    const result = pssh_base64_to_html(input.trim());
+                    document.getElementById('output').innerHTML = result;
+                } catch (e) {
+                    document.getElementById('output').innerText = "Error: " + e;
+                }
+            };
+        }
+        start();
+    </script>
+</body>
+</html>
