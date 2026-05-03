@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PSSH Multi-Tool Dashboard</title>
+    <style>
+        body { font-family: sans-serif; display: flex; margin: 0; height: 100vh; }
+        nav { width: 200px; background: #2c3e50; color: white; padding: 20px; }
+        nav button { display: block; width: 100%; padding: 10px; margin-bottom: 5px; cursor: pointer; }
+        main { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        .tool { display: none; }
+        .active { display: block; }
+        textarea { width: 100%; height: 80px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <h3>Tools</h3>
+        <button onclick="show('decode')">Decoder</button>
+        <button onclick="show('generate')">Generator</button>
+        <button onclick="show('fetch')">Fetcher</button>
+    </nav>
+
+    <main id="output-container">
+        <!-- TOOL 1: DECODER -->
+        <div id="decode" class="tool active">
+            <h2>PSSH Decoder</h2>
+            <textarea id="decIn" placeholder="Paste Base64/Hex here..."></textarea>
+            <button id="btnDec">Decode</button>
+        </div>
+
+        <!-- TOOL 2: GENERATOR -->
+        <div id="generate" class="tool">
+            <h2>Widevine Generator</h2>
+            <input id="prov" placeholder="Provider Name">
+            <input id="cid" placeholder="Content ID (Hex)">
+            <button id="btnGen">Generate Base64</button>
+        </div>
+
+        <!-- TOOL 3: FETCHER -->
+        <div id="fetch" class="tool">
+            <h2>URL Fetcher</h2>
+            <input id="url" style="width:80%" placeholder="https://example.com/video.m4s">
+            <button id="btnFetch">Fetch & Parse</button>
+        </div>
+
+        <hr>
+        <div id="display">Results will appear here...</div>
+    </main>
+
+    <script type="module">
+        import init, * as wasm from './pkg/pssh_box_wasm.js';
+
+        async function start() {
+            await init();
+            
+            // Hook up Decoder
+            document.getElementById('btnDec').onclick = () => {
+                const input = document.getElementById('decIn').value;
+                document.getElementById('display').innerHTML = wasm.pssh_base64_to_html(input);
+            };
+
+            // Hook up Generator
+            document.getElementById('btnGen').onclick = () => {
+                const res = wasm.generate_widevine_pssh_b64(0, [], 
+                    document.getElementById('prov').value, 
+                    document.getElementById('cid').value, 
+                    "", null, "WIDEVINE", null);
+                document.getElementById('display').innerText = res;
+            };
+
+            // Hook up Fetcher
+            document.getElementById('btnFetch').onclick = async () => {
+                document.getElementById('display').innerText = "Fetching...";
+                const res = await wasm.fetch_pssh_data(document.getElementById('url').value);
+                document.getElementById('display').innerHTML = res;
+            };
+        }
+        start();
+
+        window.show = (id) => {
+            document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        };
+    </script>
+</body>
+</html>
