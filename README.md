@@ -12,8 +12,7 @@ WebAssembly (WASM), and run fully in your web browser (there is no server backen
 offline once loaded).
 
 [!TIP]
-You can try out the tools in your browser at https://sidimad-tv.github.io/pssh-box-wasm-main/
-
+You can try out the tools in your browser at [https://sidimad-tv.github.io/pssh-box-wasm-main/](https://sidimad-tv.github.io/pssh-box-wasm-main/)
 PSSH boxes are used:
 
 - in an MP4 box of type `pssh` in an MP4 fragment (CMAF/MP4/ISOBMFF containers)
