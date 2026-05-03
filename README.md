@@ -11,9 +11,11 @@ The tools use code from the Rust crate [pssh-box](https://crates.io/crates/pssh-
 WebAssembly (WASM), and run fully in your web browser (there is no server backend; the tools will work fully
 offline once loaded).
 
-[!TIP]
-You can try out the tools in your browser at:
-https://sidimad-tv.github.io/pssh-box-wasm-main/
+
+> [!TIP]
+> You can [try out the tools in your browser](https://sidimad-tv.github.io/pssh-box-wasm-main/). 
+
+
 PSSH boxes are used:
 
 - in an MP4 box of type `pssh` in an MP4 fragment (CMAF/MP4/ISOBMFF containers)
