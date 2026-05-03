@@ -11,9 +11,8 @@ The tools use code from the Rust crate [pssh-box](https://crates.io/crates/pssh-
 WebAssembly (WASM), and run fully in your web browser (there is no server backend; the tools will work fully
 offline once loaded).
 
-> [!TIP]
-> You can [try out the tools in your browser](https://emarsden.github.io/pssh-box-wasm/). 
-
+[!TIP]
+You can try out the tools in your browser at https://sidimad-tv.github.io/pssh-box-wasm-main/
 
 PSSH boxes are used:
 
