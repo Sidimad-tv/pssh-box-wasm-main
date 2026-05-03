@@ -1,0 +1,24 @@
+{
+  "name": "pssh-box-wasm",
+  "type": "module",
+  "collaborators": [
+    "Eric Marsden <eric.marsden@risk-engineering.org>"
+  ],
+  "description": "Parsing and printing PSSH boxes, in WebAssembly.",
+  "version": "0.1.7",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emarsden/pssh-box-wasm/"
+  },
+  "files": [
+    "pssh_box_wasm_bg.wasm",
+    "pssh_box_wasm.js",
+    "pssh_box_wasm.d.ts"
+  ],
+  "main": "pssh_box_wasm.js",
+  "types": "pssh_box_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
