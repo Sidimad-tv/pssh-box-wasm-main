@@ -29,4 +29,4 @@ Some sample URLs for testing: [init1.mp4](https://m.dtv.fi/dash/dasherh264v3/drm
 loaded, it will run fully offline.
 
 
-<script type="module" src="../js/fetch-init.js"></script>
+<script type="module" src="/pssh-box-wasm-main/js/fetch-init.js"></script>

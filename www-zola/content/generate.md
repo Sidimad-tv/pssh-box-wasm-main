@@ -78,4 +78,4 @@ in Base 64 format.
 and runs fully inside your web browser (there is no server backend).
 
 
-<script type="module" src="../js/generate-pssh.js"></script>
+<script type="module" src="/pssh-box-wasm-main/js/generate-pssh.js"></script>
