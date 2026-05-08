@@ -2,6 +2,7 @@
 title = "Convert CDM"
 description = "A web-based tool to convert Widevine and Playready CDMs into different formats."
 authors = ["FoxRefire"]
+render = true
 +++
 
 <style>
@@ -151,5 +152,5 @@ device is defined. It works for both Widevine and Playready CDM devices.
 loaded, it will run fully offline.
 
 
-<script defer src="/pssh-box-wasm-main/pyodide/pyodide.js"></script>
-<script type="module" src="/pssh-box-wasm-main/js/convert.js"></script>
+<script defer src="../pyodide/pyodide.js"></script>
+<script type="module" src="../js/convert.js"></script>

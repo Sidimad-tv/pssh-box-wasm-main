@@ -1,6 +1,7 @@
 +++
 title = "PSSH box decoder"
 description = "Decode a DRM PSSH box directly in your browser (WASM)."
+render = true
 +++
 
 
@@ -51,5 +52,5 @@ installed, run the commandline script safely sandboxed in a container as follows
     podman run --rm docker.io/google/shaka-packager:latest pssh-box.py --from-base64 <the-pssh>
 
 
-<script type="module" src="/pssh-box-wasm-main/js/decode.js"></script>
+<script type="module" src="../js/decode.js"></script>
 

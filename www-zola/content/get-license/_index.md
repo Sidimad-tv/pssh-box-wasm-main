@@ -1,6 +1,7 @@
 +++
 title = "Widevine license request"
 description = "Make a Widevine DRM license request directly from your browser (WASM)."
+render = true
 +++
 
 
@@ -128,6 +129,6 @@ log visits (no web analytics, no cookies), but GitHub pages provides anonymized 
 
 
 
-<script defer src="/pssh-box-wasm-main/pyodide/pyodide.js"></script>
-<script type="module" src="/pssh-box-wasm-main/js/get-license.js"></script>
+<script defer src="../pyodide/pyodide.js"></script>
+<script type="module" src="../js/get-license.js"></script>
 

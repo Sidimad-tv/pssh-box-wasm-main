@@ -1,6 +1,7 @@
 +++
 title = "PSSH box generator"
 description = "Generate a Widevine PSSH box directly in your browser (WASM)."
+render = true
 +++
 
 Given a Key ID and other optional arguments, this tool generates a Widevine PSSH box and encodes it
@@ -78,4 +79,4 @@ in Base 64 format.
 and runs fully inside your web browser (there is no server backend).
 
 
-<script type="module" src="/pssh-box-wasm-main/js/generate-pssh.js"></script>
+<script type="module" src="../js/generate-pssh.js"></script>
