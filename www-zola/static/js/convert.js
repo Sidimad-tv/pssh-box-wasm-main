@@ -53,7 +53,9 @@ const myPackages = [
 let pyodide = await loadPyodide({ packages: myPackages });
 console.log("Pyodide + pywidevine loaded");
 document.getElementById("loading").style.display = "none";
-pyodide.setDebug(true);
+if (typeof pyodide.setDebug === 'function') {
+    pyodide.setDebug(true);
+}
 
 const to_WVD=`
 import js
