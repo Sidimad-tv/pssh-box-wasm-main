@@ -60,3 +60,15 @@ Useful references:
 ## License
 
 This project is licensed under the MIT license. For more information, see the `LICENSE` file.
+
+## Building
+
+This project requires the Protocol Buffers compiler (`protoc`) to build. You can install it from the [official releases](https://github.com/protocolbuffers/protobuf/releases).
+
+On Windows, download the `protoc-*-win64.zip` file, extract it, and ensure `protoc.exe` is in your PATH or set the `PROTOC` environment variable to its path.
+
+Then, run:
+
+```bash
+cargo build --release
+```
