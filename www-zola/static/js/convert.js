@@ -45,7 +45,7 @@ const myPackages = [
     "pycryptodome",
     "https://files.pythonhosted.org/packages/e8/35/4a113189f7138035a21bd255d30dc7bffc77c942c93b7948d2eac2e22429/ECPy-1.2.5-py3-none-any.whl",
     "protobuf",
-    "/pssh-box-wasm/pyodide/construct-2.8.8-py2.py3-none-any.whl",
+    "https://files.pythonhosted.org/packages/b6/2c/66bab4fef920ef8caa3e180ea601475b2cbbe196255b18f1c58215940607/construct-2.8.8.tar.gz",
     "https://files.pythonhosted.org/packages/41/9f/60f8a4c8e7767a8c34f5c42428662e03fa3e38ad18ba41fcc5370ee43263/pywidevine-1.8.0-py3-none-any.whl",
     "https://files.pythonhosted.org/packages/aa/a2/27fea39af627c0ce5dbf6108bf969ea8f5fc9376d29f11282a80e3426f1d/pymp4-1.4.0-py3-none-any.whl",
     "https://files.pythonhosted.org/packages/53/71/5d853cf6c3c919c2de67c329f41d3be59468213d95e8ef7b3d4207843475/pyplayready-0.4.4-py3-none-any.whl"
