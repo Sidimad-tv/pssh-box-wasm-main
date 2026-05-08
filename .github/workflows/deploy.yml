@@ -59,31 +59,6 @@ jobs:
           # 4. Fix permissions for GitHub servers
           find dist -type d -print0 | xargs -0 chmod 755
           find dist -type f -print0 | xargs -0 chmod 644
-          
-          # 5. Setup Pyodide (Python in WASM)
-          PYODIDE_DIST=`pwd`/dist/pyodide
-          mkdir -p $PYODIDE_DIST
-          TMPSRC=`mktemp -d /tmp/pyodide-buildXXXX`
-          
-          cd $TMPSRC
-          wget --quiet https://files.pythonhosted.org/packages/b6/2c/66bab4fef920ef8caa3e180ea601475b2cbbe196255b18f1c58215940607/construct-2.8.8.tar.gz
-          tar xzf construct-2.8.8.tar.gz
-          cd construct-2.8.8
-          python3 setup.py bdist_wheel
-          cp dist/construct-2.8.8-py2.py3-none-any.whl $PYODIDE_DIST
-          
-          cd $TMPSRC
-          git clone --quiet --recursive --depth 1 https://github.com/pyodide/pyodide.git
-          cd pyodide
-          git clone --quiet --depth 1 https://github.com/pyodide/pyodide-recipes
-          
-          # Building the heavy Python logic
-          podman run -v $PWD:/src \
-            docker.io/pyodide/pyodide-env:20240101-chrome120-firefox120-py311 \
-            /bin/bash -c "make && pyodide build-recipes micropip,pycryptodome,pyyaml,protobuf,requests,lzma,hashlib --recipe-dir pyodide-recipes/packages --install"
-          
-          cd $TMPSRC/pyodide/dist
-          cp ffi.d.ts package.json pycryptodome*.whl pyodide.asm.js pyodide.asm.wasm pyodide.d.ts pyodide.js pyodide.js.map pyodide-lock.json pyodide.mjs pyodide.mjs.map python_stdlib.zip request*whl micropip* $PYODIDE_DIST
 
       - uses: actions/configure-pages@v4
 
