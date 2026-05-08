@@ -1,7 +1,7 @@
 +++
 title = "PSSH box generator"
 description = "Generate a Widevine PSSH box directly in your browser (WASM)."
-render = true
+
 +++
 
 Given a Key ID and other optional arguments, this tool generates a Widevine PSSH box and encodes it

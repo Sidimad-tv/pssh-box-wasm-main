@@ -1,7 +1,7 @@
 +++
 title = "PSSH box decoder"
 description = "Decode a DRM PSSH box directly in your browser (WASM)."
-render = true
+
 +++
 
 

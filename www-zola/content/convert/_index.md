@@ -2,7 +2,7 @@
 title = "Convert CDM"
 description = "A web-based tool to convert Widevine and Playready CDMs into different formats."
 authors = ["FoxRefire"]
-render = true
+
 +++
 
 <style>

@@ -1,7 +1,7 @@
 +++
 title = "Widevine license request"
 description = "Make a Widevine DRM license request directly from your browser (WASM)."
-render = true
+
 +++
 
 

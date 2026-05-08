@@ -10,18 +10,25 @@
     <link rel="stylesheet" href="{{ get_url(path='css/custom.css') }}">
     <link rel="icon" href="{{ get_url(path='img/pssh-box-logo.svg') }}">
     <link rel="canonical" href="{{ current_url}}" />
-{% if page -%}
-   {% if page.title -%}
-   <title>{{ page.title }}</title>
+{% if page or section -%}
+   {% if page -%}
+      {% set content_obj = page %}
+   {% else -%}
+      {% set content_obj = section %}
+   {% endif -%}
+   {% if content_obj.title -%}
+   <title>{{ content_obj.title }}</title>
    {% else -%}
    <title>PSSH Box tools</title>
    {% endif -%}
-   {% if page.description -%}
-    <meta name="description" content="{{ page.description }}" />
+   {% if content_obj.description -%}
+    <meta name="description" content="{{ content_obj.description }}" />
    {% endif -%}
 {% endif %}
     {% if page.authors -%}
     <meta name="author" content="{{ page.authors | join(sep=', ') }}" />
+    {% elif section.authors -%}
+    <meta name="author" content="{{ section.authors | join(sep=', ') }}" />
     {% else -%}
     <meta name="author" content="Eric Marsden">
     {% endif -%}
@@ -32,16 +39,21 @@
   </head>
   <body>
     <header>
+      {% if page or section %}
       {% if page %}
+       {% set title_text = page.title %}
+      {% else %}
+       {% set title_text = section.title %}
+      {% endif %}
       <nav aria-label="breadcrumb">
        <ul>
         <li><a href="{{ get_url(path='/') }}">PSSH box tools</a></li>
-        <li>{{ page.title }}</li>
+        <li>{{ title_text }}</li>
        </ul>
       </nav>
 
       <h1><img src="{{ get_url(path='img/pssh-box-logo.svg') }}" style="width:1em" alt="">&nbsp;
-      {{ page.title }}
+      {{ title_text }}
       &nbsp;<img src="{{ get_url(path='img/beta.svg') }}" style="width:1em;position:relative;top:-1.1ex;" alt="">
       </h1>
       {% else %}
