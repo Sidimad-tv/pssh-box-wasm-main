@@ -11,8 +11,9 @@ The tools use code from the Rust crate [pssh-box](https://crates.io/crates/pssh-
 WebAssembly (WASM), and run fully in your web browser (there is no server backend; the tools will work fully
 offline once loaded).
 
+
 > [!TIP]
-> You can [try out the tools in your browser](https://emarsden.github.io/pssh-box-wasm/). 
+> You can [try out the tools in your browser](https://sidimad-tv.github.io/pssh-box-wasm-main/). 
 
 
 PSSH boxes are used:
@@ -59,3 +60,15 @@ Useful references:
 ## License
 
 This project is licensed under the MIT license. For more information, see the `LICENSE` file.
+
+## Building
+
+This project requires the Protocol Buffers compiler (`protoc`) to build. You can install it from the [official releases](https://github.com/protocolbuffers/protobuf/releases).
+
+On Windows, download the `protoc-*-win64.zip` file, extract it, and ensure `protoc.exe` is in your PATH or set the `PROTOC` environment variable to its path.
+
+Then, run:
+
+```bash
+cargo build --release
+```
