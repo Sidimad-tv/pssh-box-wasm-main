@@ -27,6 +27,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Wheel Builder Dependencies
+        run: pip install wheel setuptools
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
@@ -46,17 +54,29 @@ jobs:
 
       - name: Build bundle
         run: |
+          # 1. Clear and Build Zola site
           rm -rf dist/
-          # 1. Build the Zola site into the dist folder
           (cd www-zola && zola build --output-dir ../dist)
-          
-          # 2. Build the Rust WASM package
+
+          # 2. Build the Rust WASM (pssh_box_wasm)
           wasm-pack build --release --target web
-          
-          # 3. Copy WASM files into the deployment folder
           cp -r pkg dist/
+
+          # 3. BUILD THE MISSING BRICK (construct 2.8.8)
+          # We build this manually because it's not available as a wheel on PyPI
+          mkdir -p temp_build
+          cd temp_build
+          wget https://files.pythonhosted.org/packages/b6/2c/66bab4fef920ef8caa3e180ea601475b2cbbe196255b18f1c58215940607/construct-2.8.8.tar.gz
+          tar xzf construct-2.8.8.tar.gz
+          cd construct-2.8.8
+          python3 setup.py bdist_wheel
           
-          # 4. Fix permissions for GitHub servers
+          # 4. Copy the newly built wheel into our final website folder
+          mkdir -p ../../dist/wheels
+          cp dist/construct-2.8.8-py2.py3-none-any.whl ../../dist/wheels/
+          cd ../..
+
+          # 5. Set permissions so the browser can read the files
           find dist -type d -print0 | xargs -0 chmod 755
           find dist -type f -print0 | xargs -0 chmod 644
 
