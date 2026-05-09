@@ -85,7 +85,7 @@ jobs:
           echo "Check if wheels folder exists:"
           ls -R $DIST_PATH/wheels
 
-      - uses: actions/configure-pages@v4
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
