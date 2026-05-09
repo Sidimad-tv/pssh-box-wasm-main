@@ -12,7 +12,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
 
     permissions:
@@ -54,16 +53,18 @@ jobs:
 
       - name: Build bundle
         run: |
-          # 1. Clear and Build Zola site
-          rm -rf dist/
-          (cd www-zola && zola build --output-dir ../dist)
+          # 1. Create an absolute path for dist
+          export DIST_PATH=$(pwd)/dist
+          rm -rf $DIST_PATH
+          
+          # 2. Build Zola site
+          (cd www-zola && zola build --output-dir $DIST_PATH)
 
-          # 2. Build the Rust WASM (pssh_box_wasm)
+          # 3. Build Rust WASM
           wasm-pack build --release --target web
-          cp -r pkg dist/
+          cp -r pkg $DIST_PATH/
 
-          # 3. BUILD THE MISSING BRICK (construct 2.8.8)
-          # We build this manually because it's not available as a wheel on PyPI
+          # 4. Build Construct 2.8.8
           mkdir -p temp_build
           cd temp_build
           wget https://files.pythonhosted.org/packages/b6/2c/66bab4fef920ef8caa3e180ea601475b2cbbe196255b18f1c58215940607/construct-2.8.8.tar.gz
@@ -71,17 +72,20 @@ jobs:
           cd construct-2.8.8
           python3 setup.py bdist_wheel
           
-          # 4. Copy the newly built wheel into our final website folder
-          mkdir -p ../../dist/wheels
-          cp dist/construct-2.8.8-py2.py3-none-any.whl ../../dist/wheels/
-          cd ../..
-
-          # 5. Set permissions so the browser can read the files
-          find dist -type d -print0 | xargs -0 chmod 755
-          find dist -type f -print0 | xargs -0 chmod 644
+          # 5. Copy the wheel to the correct absolute path
+          mkdir -p $DIST_PATH/wheels
+          cp dist/*.whl $DIST_PATH/wheels/
+          
+          # 6. Return to root and fix permissions
+          cd ../../
+          find $DIST_PATH -type d -print0 | xargs -0 chmod 755
+          find $DIST_PATH -type f -print0 | xargs -0 chmod 644
+          
+          # VERIFICATION
+          echo "Check if wheels folder exists:"
+          ls -R $DIST_PATH/wheels
 
       - uses: actions/configure-pages@v4
-
       - uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
